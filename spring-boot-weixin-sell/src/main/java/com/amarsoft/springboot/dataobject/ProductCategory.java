@@ -12,7 +12,11 @@ import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.DynamicUpdate;
 
 import lombok.Data;
 
@@ -24,12 +28,12 @@ import lombok.Data;
  * @version:v.1.0
  */
 @Entity
-@Data
+//@DynamicUpdate
 public class ProductCategory {
 	
 	/** 类目id. */
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer categoryId;
 	
 	/**类目名称.*/
@@ -38,24 +42,120 @@ public class ProductCategory {
 	/**类目编号.*/
 	private Integer categoryType;
 	
-	private Date categoryTime;
+	private Date createTime;
 	
 	private Date updateTime;
 	
 	public ProductCategory() {
 	}
 
-	/** 
-	　 * <p>Title: ProductCategory</p> 
-	　 * <p>Description: 有参构造函数</p> 
-	　 * @param categoryName
-	　 * @param categoryType 
-	  */
 	
+	/**
+	* @return the categoryId 
+	*/
+	
+	public Integer getCategoryId() {
+		return categoryId;
+	}
+
+
+	/**
+	* @param categoryId the categoryId to set 
+	*/
+	
+	public void setCategoryId(Integer categoryId) {
+		this.categoryId = categoryId;
+	}
+
+
+	/**
+	* @return the categoryName 
+	*/
+	
+	public String getCategoryName() {
+		return categoryName;
+	}
+
+
+	/**
+	* @param categoryName the categoryName to set 
+	*/
+	
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
+	}
+
+
+	/**
+	* @return the categoryType 
+	*/
+	
+	public Integer getCategoryType() {
+		return categoryType;
+	}
+
+
+	/**
+	* @param categoryType the categoryType to set 
+	*/
+	
+	public void setCategoryType(Integer categoryType) {
+		this.categoryType = categoryType;
+	}
+
+
+	
+
+	/**
+	* @return the createTime 
+	*/
+	
+	public Date getCreateTime() {
+		return createTime;
+	}
+
+
+	/**
+	* @param createTime the createTime to set 
+	*/
+	
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
+
+
+	/**
+	* @return the updateTime 
+	*/
+	
+	public Date getUpdateTime() {
+		return updateTime;
+	}
+
+
+	/**
+	* @param updateTime the updateTime to set 
+	*/
+	
+	public void setUpdateTime(Date updateTime) {
+		this.updateTime = updateTime;
+	}
+
+
 	public ProductCategory(String categoryName, Integer categoryType) {
 		super();
 		this.categoryName = categoryName;
 		this.categoryType = categoryType;
 	}
+
+	
+
+	@Override
+	public String toString() {
+		return "ProductCategory [categoryId=" + categoryId + ", categoryName=" + categoryName + ", categoryType="
+				+ categoryType + ", createTime=" + createTime + ", updateTime=" + updateTime + "]";
+	}
+
+
 
 }
