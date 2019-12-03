@@ -28,7 +28,8 @@ import lombok.Data;
  * @version:v.1.0
  */
 @Entity
-//@DynamicUpdate
+@DynamicUpdate
+@Data
 public class ProductCategory {
 	
 	/** 类目id. */
@@ -50,106 +51,21 @@ public class ProductCategory {
 	}
 
 	
-	/**
-	* @return the categoryId 
-	*/
 	
-	public Integer getCategoryId() {
-		return categoryId;
-	}
-
-
-	/**
-	* @param categoryId the categoryId to set 
-	*/
-	
-	public void setCategoryId(Integer categoryId) {
-		this.categoryId = categoryId;
-	}
-
-
-	/**
-	* @return the categoryName 
-	*/
-	
-	public String getCategoryName() {
-		return categoryName;
-	}
-
-
-	/**
-	* @param categoryName the categoryName to set 
-	*/
-	
-	public void setCategoryName(String categoryName) {
-		this.categoryName = categoryName;
-	}
-
-
-	/**
-	* @return the categoryType 
-	*/
-	
-	public Integer getCategoryType() {
-		return categoryType;
-	}
-
-
-	/**
-	* @param categoryType the categoryType to set 
-	*/
-	
-	public void setCategoryType(Integer categoryType) {
-		this.categoryType = categoryType;
-	}
-
-
-	
-
-	/**
-	* @return the createTime 
-	*/
-	
-	public Date getCreateTime() {
-		return createTime;
-	}
-
-
-	/**
-	* @param createTime the createTime to set 
-	*/
-	
-	public void setCreateTime(Date createTime) {
-		this.createTime = createTime;
-	}
-
-
-	/**
-	* @return the updateTime 
-	*/
-	
-	public Date getUpdateTime() {
-		return updateTime;
-	}
-
-
-	/**
-	* @param updateTime the updateTime to set 
-	*/
-	
-	public void setUpdateTime(Date updateTime) {
-		this.updateTime = updateTime;
-	}
-
-
 	public ProductCategory(String categoryName, Integer categoryType) {
 		super();
 		this.categoryName = categoryName;
 		this.categoryType = categoryType;
 	}
 
-	
 
+	/* (non-Javadoc) 
+	* <p>Title: toString</p> 
+	* <p>Description: </p> 
+	* @return 
+	* @see java.lang.Object#toString() 
+	*/
+	
 	@Override
 	public String toString() {
 		return "ProductCategory [categoryId=" + categoryId + ", categoryName=" + categoryName + ", categoryType="
