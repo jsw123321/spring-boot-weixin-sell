@@ -51,7 +51,6 @@ public class CategoryServiceImpl implements CategoryService {
 		return  repository.findAll();
 	}
 
-
 	
     
 }
