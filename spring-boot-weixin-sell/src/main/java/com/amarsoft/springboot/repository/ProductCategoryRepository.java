@@ -23,10 +23,7 @@ import com.amarsoft.springboot.dataobject.ProductCategory;
  */
 public interface ProductCategoryRepository extends JpaRepository<ProductCategory, Integer>{
 
-//	List<ProductCategory> findByCategoryTypeIn(List<Integer> categoryTypeList);
-//
-//	
-//	ProductCategory findOne(int i);
-
-
+	List<ProductCategory> findByCategoryTypeIn(List<Integer> categoryTypeList);
+    
+//	void UpdateCategoryAndFlush(ProductCategory  productCategory);
 }
