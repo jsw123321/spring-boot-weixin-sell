@@ -68,7 +68,7 @@ public class ProductInfoServiceTest {
 	 * @author jiangshanwen
 	 * @date 2019年12月8日 下午10:59:31
 	 */
-	@Test
+	@Test 
 	public void testfindUPAll() {
 		List<ProductInfo> findUpAllList = productInfoService.findUpAll(ProductStatusEnum.UP.getCode());
 		System.out.println(findUpAllList.toString());
