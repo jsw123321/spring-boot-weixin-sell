@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.amarsoft.springboot.dataobject.ProductInfo;
+import com.amarsoft.springboot.enums.ProductStatusEnum;
 import com.amarsoft.springboot.repository.ProductInfoRepository;
 import com.amarsoft.springboot.service.ProductInfoService;
 
@@ -37,8 +38,8 @@ public class ProductInfoServiceImpl implements ProductInfoService {
 	}
 
 	@Override
-	public List<ProductInfo> findUpAll(Integer ProductStatus) {
-		return productInfoRepository.findByProductStatus(ProductStatus);
+	public List<ProductInfo> findUpAll() {
+		return productInfoRepository.findByProductStatus(ProductStatusEnum.UP.getCode());
 	}
     
 	@Override

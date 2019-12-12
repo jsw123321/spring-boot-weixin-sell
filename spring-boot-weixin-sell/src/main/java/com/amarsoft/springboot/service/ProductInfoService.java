@@ -23,7 +23,7 @@ public interface ProductInfoService {
 
 	ProductInfo  findOne(String productId);
 	
-	List<ProductInfo> findUpAll(Integer ProductStatus);
+	List<ProductInfo> findUpAll();
 
 	/**  
 	 * @Title: findAll

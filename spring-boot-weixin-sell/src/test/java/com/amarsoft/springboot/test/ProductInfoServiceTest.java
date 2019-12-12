@@ -70,7 +70,7 @@ public class ProductInfoServiceTest {
 	 */
 	@Test 
 	public void testfindUPAll() {
-		List<ProductInfo> findUpAllList = productInfoService.findUpAll(ProductStatusEnum.UP.getCode());
+		List<ProductInfo> findUpAllList = productInfoService.findUpAll();
 		System.out.println(findUpAllList.toString());
 	}
 
