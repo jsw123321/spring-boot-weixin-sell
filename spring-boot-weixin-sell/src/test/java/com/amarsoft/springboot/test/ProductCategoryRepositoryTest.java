@@ -83,12 +83,12 @@ public class ProductCategoryRepositoryTest {
 	 */
 	@Test
 	public void testSaveInBatch(){
-		ProductCategory productCategory1=new ProductCategory("男生最爱1", 1);
-		ProductCategory productCategory2=new ProductCategory("男生最爱2", 2);
-		ProductCategory productCategory3=new ProductCategory("男生最爱3", 3);
-		ProductCategory productCategory4=new ProductCategory("男生最爱4", 4);
-		ProductCategory productCategory5=new ProductCategory("男生最爱5", 5);
-		ProductCategory productCategory6=new ProductCategory("男生最爱6", 6);
+		ProductCategory productCategory1=new ProductCategory("男生最爱11", 1);
+		ProductCategory productCategory2=new ProductCategory("男生最爱22", 2);
+		ProductCategory productCategory3=new ProductCategory("男生最爱33", 3);
+		ProductCategory productCategory4=new ProductCategory("男生最爱44", 4);
+		ProductCategory productCategory5=new ProductCategory("男生最爱55", 5);
+		ProductCategory productCategory6=new ProductCategory("男生最爱66", 6);
 		List<ProductCategory> entities= new ArrayList<ProductCategory>();
 		entities.add(productCategory1);
 		entities.add(productCategory2);

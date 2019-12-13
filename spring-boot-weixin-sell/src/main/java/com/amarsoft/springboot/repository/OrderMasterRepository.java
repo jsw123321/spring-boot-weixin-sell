@@ -8,9 +8,9 @@
 
 package com.amarsoft.springboot.repository;
 
-import java.util.List;
-import java.util.Optional;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.amarsoft.springboot.dataobject.OrderMaster;
@@ -23,7 +23,19 @@ import com.amarsoft.springboot.dataobject.OrderMaster;
  * @version:v.1.0
  */
 public interface OrderMasterRepository extends JpaRepository<OrderMaster, String> {
+
+	/**  
+	 * @Title: fingByBuyerOpenid
+	 * @Description: TODO(描述)
+	 * @param oPENID
+	 * @param result
+	 * @return
+	 * @author jiangshanwen
+	 * @date 2019年12月13日 下午10:17:33
+	 */  
+//    Page<OrderMaster> fingByBuyerOpenid(String buyerOpenid, PageRequest result);
 //	Optional<OrderMaster> findById(String id);
-//	
+    //Page<OrderMaster>  findByBuyerOpenid(String buyerOpenid,Pageable pageable,pageSize);
+//	Page<OrderMaster>  fingByBuyerOpenid(String buyerOpenid,Pageable pageable);
 //	List<OrderMaster> findAll();
 }

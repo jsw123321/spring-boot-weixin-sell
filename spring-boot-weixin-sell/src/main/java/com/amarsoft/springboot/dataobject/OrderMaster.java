@@ -14,6 +14,8 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+import org.hibernate.annotations.DynamicUpdate;
+
 import lombok.Data;
 
 /**
@@ -24,6 +26,7 @@ import lombok.Data;
  * @version:v.1.0
  */
 @Entity
+@DynamicUpdate
 @Data
 public class OrderMaster {
 	
