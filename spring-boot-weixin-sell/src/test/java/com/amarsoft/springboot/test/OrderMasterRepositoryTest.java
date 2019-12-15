@@ -8,7 +8,7 @@
 
 package com.amarsoft.springboot.test;
 
-import java.util.List;
+import java.math.BigDecimal;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -21,8 +21,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.amarsoft.springboot.dataobject.OrderMaster;
 import com.amarsoft.springboot.repository.OrderMasterRepository;
-
-import reactor.core.Fuseable.SynchronousSubscription;
 
 /** 
  * @Title: 
@@ -47,8 +45,8 @@ public class OrderMasterRepositoryTest {
 		orderMaster.setBuyerOpenid(OPENID);
 		orderMaster.setBuyerName("jiangshanwen05");
 		orderMaster.setBuyerAddress("广东省深圳市福田区沙嘴二坊");
-		orderMaster.setBuyerPhone("13245968982");
-		orderMaster.setOrderAmount(14);
+		orderMaster.setBuyerPhone("13245968985");
+		orderMaster.setOrderAmount(new BigDecimal(55));
 		orderMaster.setPayStatus(0);
 		orderMaster.setOrderStatus(0);
 		OrderMaster save = orderMasterRepository.save(orderMaster);

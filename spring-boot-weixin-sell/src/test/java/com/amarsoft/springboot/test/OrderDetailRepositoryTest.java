@@ -8,6 +8,7 @@
 
 package com.amarsoft.springboot.test;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -43,7 +44,7 @@ public class OrderDetailRepositoryTest {
     	orderDetail.setDetailId("1001012");
     	orderDetail.setProductId("100101101");
     	orderDetail.setProductName("皮蛋粥");
-    	orderDetail.setProductPrice(3.50);
+    	orderDetail.setProductPrice(new BigDecimal(3.50));
     	orderDetail.setProductIcon("http://xxx.jpg");
     	orderDetail.setProductQuantity(144);
     	OrderDetail orderDetailSave = orderDetailRepository.save(orderDetail);

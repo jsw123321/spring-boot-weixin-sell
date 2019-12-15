@@ -65,6 +65,7 @@ public class BuyerProductController {
 				if(productInfo.getCategoryType()==(productCategory.getCategoryType())){
 					ProductInfoVO productInfoVO=new ProductInfoVO();
 					BeanUtils.copyProperties(productInfo,productInfoVO);
+					productInfoVO.setProductPrice(productInfo.getProductPrice());
 					productInfoVOList.add(productInfoVO);
 				}
 				

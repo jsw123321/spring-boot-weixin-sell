@@ -11,6 +11,7 @@ package com.amarsoft.springboot.service;
 import java.util.List;
 
 import com.amarsoft.springboot.dataobject.ProductInfo;
+import com.amarsoft.springboot.dto.CartDTO;
 
 /** 
  * @Title: 
@@ -33,5 +34,11 @@ public interface ProductInfoService {
 	 * @date 2019年12月8日 下午11:03:17
 	 */  
 	List<ProductInfo> findAll();
+	
+	//减少库存
+	void decreaseStock(List<CartDTO> cartDTOList);
+	
+	//增加库存
+	void increaseStock(List<CartDTO> cartDTOList);
 
 }

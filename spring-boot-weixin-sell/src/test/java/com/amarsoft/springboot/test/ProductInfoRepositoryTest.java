@@ -8,6 +8,7 @@
 
 package com.amarsoft.springboot.test;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.junit.Assert;
@@ -49,7 +50,7 @@ public class ProductInfoRepositoryTest {
 	    	 productInfo.setProductId("prd004");
 	    	 productInfo.setProductName("肉末茄子");
 	    	 productInfo.setProductDescription("价格实惠,味道很不错！");
-	    	 productInfo.setProductPrice(12.00);
+	    	 productInfo.setProductPrice(new BigDecimal(12.00));
 	    	 productInfo.setProductStock(91);
 	    	 productInfo.setProductStatus(1);
 	    	 productInfo.setCategoryType(1);

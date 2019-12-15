@@ -8,6 +8,7 @@
 
 package com.amarsoft.springboot.dataobject;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -40,10 +41,10 @@ public class OrderDetail {
 	private String productName;
 	
 	/**当前价格，单位分.*/
-	private double productPrice;
+	private BigDecimal productPrice;
 	
 	/**数量.*/
-	private int productQuantity;
+	private Integer productQuantity;
 	
 	/**小图.*/
 	private String productIcon;

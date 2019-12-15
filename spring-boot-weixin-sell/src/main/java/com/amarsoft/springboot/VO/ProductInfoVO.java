@@ -31,7 +31,7 @@ public class ProductInfoVO {
 	private String productName;
 	
 	@JsonProperty("price")
-	private double productPrice;
+	private BigDecimal productPrice;
 	
 	@JsonProperty("description")
 	private String ProductDescription;

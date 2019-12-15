@@ -1,42 +1,35 @@
 /** 
-　 * Title: OrderMaster.java 
+　 * Title: OrderDto.java 
 　 * Description: TODO(一句话描述这个方法的目的和作用)
 　 * @author jiangshanwen 
-　 * @date 2019年12月12日
+　 * @date 2019年12月14日
 　 * @version 1.0 
 */
 
-package com.amarsoft.springboot.dataobject;
+package com.amarsoft.springboot.dto;
 
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import org.hibernate.annotations.DynamicUpdate;
-import org.springframework.data.annotation.Transient;
+import com.amarsoft.springboot.dataobject.OrderDetail;
 
 import lombok.Data;
 
-/**
- * @Title:
- * @Description: （对类进行功能描述）
+/** 
+ * @Title: 
+ * @Description: （对类进行功能描述） 
  * @author jiangshanwen
- * @date: 2019年12月12日下午11:20:58 （日期）
+ * @date: 2019年12月14日下午11:30:48 （日期） 
  * @version:v.1.0
  */
-@Entity
-@DynamicUpdate
 @Data
-public class OrderMaster {
-	
+public class OrderDTO {
+
 	/** 订单id. */
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private String orderId;
 
 	/** 买家名字. */
@@ -52,7 +45,6 @@ public class OrderMaster {
 	private String buyerOpenid;
 
 	/** 订单总金额. */
-//	private double orderAmount;
 	private BigDecimal orderAmount;
 
 	/** 订单状态，默认为新下单. */
@@ -68,7 +60,6 @@ public class OrderMaster {
 	private Date updateTime;
 
 	/**订单明细列表.*/
-//	@Transient
-//	private List<OrderDetail> orderDetailList;
+	private List<OrderDetail> orderDetailList;
 
 }

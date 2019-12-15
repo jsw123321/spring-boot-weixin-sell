@@ -8,6 +8,7 @@
 
 package com.amarsoft.springboot.dataobject;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -42,12 +43,12 @@ public class ProductInfo {
 	/**
 	 *单价
 	 */
-	private double productPrice;
+	private BigDecimal productPrice;
 	
 	/**
 	 *库存
 	 */
-	private int productStock;
+	private Integer productStock;
 	
 	/**
 	 *描述
@@ -62,12 +63,12 @@ public class ProductInfo {
 	/**
 	 * 商品状态,0正常1下架
 	 */
-	private int productStatus;
+	private Integer productStatus;
 	
 	/**
 	 *类目编号
 	 */
-	private int categoryType;
+	private Integer categoryType;
 	
 	/**
 	 *创建时间
@@ -99,7 +100,7 @@ public class ProductInfo {
 	　 * @param updateTime 
 	*/
 	
-	public ProductInfo(String productId, String productName, double productPrice, int productStock,
+	public ProductInfo(String productId, String productName, BigDecimal productPrice, int productStock,
 			String productDescription, String productIcon, int productStatus, int categoryType, Date createTime,
 			Date updateTime) {
 		super();
