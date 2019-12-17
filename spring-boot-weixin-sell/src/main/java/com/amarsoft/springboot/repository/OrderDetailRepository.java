@@ -8,6 +8,8 @@
 
 package com.amarsoft.springboot.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.amarsoft.springboot.dataobject.OrderDetail;
@@ -20,5 +22,5 @@ import com.amarsoft.springboot.dataobject.OrderDetail;
  * @version:v.1.0
  */
 public interface OrderDetailRepository extends JpaRepository<OrderDetail, String> {
-
+    List<OrderDetail> findListByOrderId(String OrderId);
 }

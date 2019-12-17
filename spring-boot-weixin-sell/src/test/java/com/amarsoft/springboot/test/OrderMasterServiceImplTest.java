@@ -19,6 +19,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.amarsoft.springboot.dataobject.OrderDetail;
@@ -57,7 +59,8 @@ public class OrderMasterServiceImplTest {
 	
 	 
 	 private final String OPENID="201912151747";
-	 
+	 private final String ORDERID="1576409643590274207";
+	 private final String BUYEROPENID="123123";
 	 @Test
 	 public  void testCreateOrderMaster(){
 		    /**
@@ -116,4 +119,30 @@ prd005	蚂蚁上树	18	333	价格实惠,味道很不错！	http://很健康.jpg	
 		 log.info("【创建订单】：result={}",result);
 		 Assert.assertNotNull(result);
 	}
+	 
+	 
+	 @Test
+	 public void testfindOne(){
+		 OrderDTO findOne = orderService.findOne(ORDERID);
+		 log.info("【查询订单】：result={}",findOne);
+	 }
+	 
+	 
+	 @Test
+	 public void testfindList(){
+		 PageRequest pageRequest=new PageRequest(1,3);
+		 Page<OrderDTO> findList = orderService.findList(BUYEROPENID, pageRequest);
+		 System.out.println(findList.getTotalElements()+"-----"+findList.getContent());
+		 Assert.assertNotEquals(0, findList.getTotalElements());
+	 }
+	 
+	 @Test
+	 public void testCancle(){
+		 OrderDTO findOne = orderService.findOne(ORDERID);
+		 OrderDTO cancle = orderService.cancle(findOne);
+		 Assert.assertEquals(0,cancle.getOrderStatus().doubleValue());
+	 }
+	 
+	 
+	 
 }

@@ -25,7 +25,11 @@ import lombok.Getter;
 public enum ResultEnum {
 	
     PRODUCT_NOT_EXIST(10,"商品不存在"),
-    PRODUCT_STOCK_ERROR(20,"商品已售罄");
+    PRODUCT_STOCK_ERROR(11,"商品已售罄"),
+	ORDER_MASTER_ERROR(12,"订单不存在"),
+	ORDER_DETAIL_ERROR(13,"订单详情为空"),
+	ORDER_STATUS_ERROR(13,"订单状态不正确"),
+	ORDER_UPDATE_ERROR(14,"取消订单失败");
 	
 	private Integer code;
 	

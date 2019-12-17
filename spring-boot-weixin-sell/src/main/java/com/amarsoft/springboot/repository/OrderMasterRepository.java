@@ -33,7 +33,7 @@ public interface OrderMasterRepository extends JpaRepository<OrderMaster, String
 	 * @author jiangshanwen
 	 * @date 2019年12月13日 下午10:17:33
 	 */  
-//    Page<OrderMaster> fingByBuyerOpenid(String buyerOpenid, PageRequest result);
+    Page<OrderMaster> buyerOpenid(String buyerOpenid, Pageable result);
 //	Optional<OrderMaster> findById(String id);
     //Page<OrderMaster>  findByBuyerOpenid(String buyerOpenid,Pageable pageable,pageSize);
 //	Page<OrderMaster>  fingByBuyerOpenid(String buyerOpenid,Pageable pageable);

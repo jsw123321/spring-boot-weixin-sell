@@ -16,9 +16,13 @@ import java.util.stream.Collectors;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
+import com.amarsoft.springboot.converters.OrderMaster2OrderDTOConverter;
 import com.amarsoft.springboot.dataobject.OrderDetail;
 import com.amarsoft.springboot.dataobject.OrderMaster;
 import com.amarsoft.springboot.dataobject.ProductInfo;
@@ -59,19 +63,29 @@ public class OrderServiceImpl implements OrderService {
 	 @Autowired
 	 private OrderMasterRepository  orderMasterRepository;
 
-	    /**
-	     * ```
-			POST /sell/buyer/order/create
-			参数
-			name: "张三"
-			phone: "18868822111"
-			address: "慕课网总部"
-			openid: "ew3euwhd7sjw9diwkq" //用户的微信openid
-			items: [{
-			    productId: "1423113435324",
-			    productQuantity: 2 //购买数量
-			}]
-	     */
+    /**
+     * ```
+		POST /sell/buyer/order/create
+		参数
+		name: "张三"
+		phone: "18868822111"
+		address: "慕课网总部"
+		openid: "ew3euwhd7sjw9diwkq" //用户的微信openid
+		items: [{
+		    productId: "1423113435324",
+		    productQuantity: 2 //购买数量
+		}]
+     */
+	 /**
+	  * 
+	  * @Title: create
+	  * @Description: 创建订单
+	  * @param orderDTO
+	  * @return  OrderDTO
+	  * @author jiangshanwen
+	  * @date 2019年12月15日 下午7:35:18
+	  * @throws
+	  */
 	@Override
 	public OrderDTO create(OrderDTO orderDTO) {
 		/**OrderDTO
@@ -124,6 +138,7 @@ public class OrderServiceImpl implements OrderService {
 		//(4)字段赋值:给订单明细的字段赋值
 			orderDetail.setDetailId(KeyUtils.getUniqueKey());
 			BeanUtils.copyProperties(productInfo, orderDetail);
+			System.out.println(orderId);
 			log.info("orderId:{}",orderId);
 			orderDetail.setOrderId(orderId);
 			orderDetailRepository.save(orderDetail);
@@ -168,33 +183,80 @@ public class OrderServiceImpl implements OrderService {
 		return orderDTO;
 	}
 
-
+    /**
+     * 
+     * @Title: findOne
+     * @Description: 根据订单id查询所属订单
+     * @param orderId
+     * @return OrderDTO
+     * @author jiangshanwen
+     * @date 2019年12月15日 下午7:36:36
+     * @throws
+     */
 	@Override
 	public OrderDTO findOne(String orderId) {
-		// TODO Auto-generated method stub
-		return null;
+		OrderMaster orderMaster = orderMasterRepository.getOne(orderId);
+		if(null==orderMaster){
+			throw new SellException(ResultEnum.ORDER_MASTER_ERROR);
+		}
+//		OrderMaster one = orderMasterRepository.getOne("1576409643590274207");
+		OrderDTO orderDTO=new OrderDTO();
+		BeanUtils.copyProperties(orderMaster, orderDTO);
+		List<OrderDetail> orderDetailList = orderDetailRepository.findListByOrderId(orderId);
+		if(CollectionUtils.isEmpty(orderDetailList)){
+			throw new SellException(ResultEnum.ORDER_DETAIL_ERROR);
+		}
+		orderDTO.setOrderDetailList(orderDetailList);
+		return orderDTO;
 	}
-
-	
-
+    /**
+     * 
+     * @Title: findList
+     * @Description: 查询当前用户下所有的订单
+     * @param  buyerOpenid
+     * @param  pageable
+     * @return  Page<OrderDTO> 
+     * @author jiangshanwen
+     * @date 2019年12月15日 下午7:57:01
+     * @throws
+     */
 	@Override
 	public Page<OrderDTO> findList(String buyerOpenid, Pageable pageable) {
-		// TODO Auto-generated method stub
-		return null;
+		Page<OrderMaster> OrderMasterPage = orderMasterRepository.buyerOpenid(buyerOpenid, pageable);
+		List<OrderDTO> orderDTOList = OrderMaster2OrderDTOConverter.convert(OrderMasterPage.getContent());
+		return new PageImpl<OrderDTO>(orderDTOList,pageable,OrderMasterPage.getTotalElements());
 	}
 
-	/* (non-Javadoc) 
-	* <p>Title: cancle</p> 
-	* <p>Description: </p> 
-	* @param orderDTO
-	* @return 
-	* @see com.amarsoft.springboot.service.OrderService#cancle(com.amarsoft.springboot.dto.OrderDTO) 
-	*/
 
 	@Override
 	public OrderDTO cancle(OrderDTO orderDTO) {
-		// TODO Auto-generated method stub
-		return null;
+		OrderMaster orderMaster=new OrderMaster();
+		//(1)判断订单状态
+		if(!orderDTO.getOrderStatus().equals(OrderStatusEnum.NEW.getCode())){
+			log.info("【取消订单】订单状态不正确:OrderId:{},	OrderStatus:{}",orderDTO.getOrderId(),orderDTO.getOrderStatus());
+			throw new SellException(ResultEnum.ORDER_STATUS_ERROR);
+		}
+		
+		//(2)修改订单状态
+		orderDTO.setOrderStatus(OrderStatusEnum.CANCLE.getCode());
+		BeanUtils.copyProperties(orderDTO, orderMaster);
+		OrderMaster updateResult = orderMasterRepository.save(orderMaster);
+		if(null==updateResult){
+			log.info("【取消订单】订单取消失败：orderId:{}",orderMaster.getOrderId());
+			throw new SellException(ResultEnum.ORDER_UPDATE_ERROR);
+		}
+		//(3)返回库存
+		if(CollectionUtils.isEmpty(orderDTO.getOrderDetailList())){
+			log.info("【取消订单】订单详情为空:ordeDTO:{}",orderDTO);
+			throw new SellException(ResultEnum.ORDER_DETAIL_ERROR);
+		}
+		List<CartDTO> cartDTOList = orderDTO.getOrderDetailList().stream().map(e ->new CartDTO(e.getProductId(),e.getProductQuantity())).collect(Collectors.toList());
+		productInfoService.increaseStock(cartDTOList);
+		//(4)如果已支付，就退款
+		if(orderDTO.getPayStatus().equals(PayStatusEnum.PAY.getCode())){
+			//todo
+		}
+		return orderDTO;
 	}
 
 	/* (non-Javadoc) 

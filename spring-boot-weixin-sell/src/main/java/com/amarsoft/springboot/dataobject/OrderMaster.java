@@ -36,7 +36,7 @@ public class OrderMaster {
 	
 	/** 订单id. */
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+//	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private String orderId;
 
 	/** 买家名字. */
