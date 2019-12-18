@@ -40,7 +40,6 @@ public class CategoryServiceImpl implements CategoryService {
 	@Autowired
 	private ProductCategoryRepository repository;
     
-	
 	@Override
 	public ProductCategory findOne(Integer categoryId) {
 		return repository.getOne(categoryId);
@@ -50,7 +49,6 @@ public class CategoryServiceImpl implements CategoryService {
 	public List<ProductCategory> findAll(){
 		return  repository.findAll();
 	}
-	
 	@Override
 	public List<ProductCategory> findByCategoryTypeIn(List<Integer> categoryTypeList) {
 		return repository.findByCategoryTypeIn(categoryTypeList);

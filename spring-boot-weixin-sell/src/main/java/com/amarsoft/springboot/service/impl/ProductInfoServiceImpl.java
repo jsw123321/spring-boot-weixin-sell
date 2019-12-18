@@ -64,7 +64,6 @@ public class ProductInfoServiceImpl implements ProductInfoService {
 	public void save(ProductInfo productInfo) {
 		productInfoRepository.save(productInfo);
 	}
-
 	@Override
 	public void decreaseStock(List<CartDTO> cartDTOList) {
 		for (CartDTO cartDTO : cartDTOList) {
@@ -82,7 +81,9 @@ public class ProductInfoServiceImpl implements ProductInfoService {
 			productInfoRepository.save(productInfo);
 		}
 	}
-
+    /**
+     * 
+     */
 	@Override
 	public void increaseStock(List<CartDTO> cartDTOList) {
 		/**

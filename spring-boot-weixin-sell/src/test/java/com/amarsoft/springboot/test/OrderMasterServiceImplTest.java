@@ -25,6 +25,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.amarsoft.springboot.dataobject.OrderDetail;
 import com.amarsoft.springboot.dto.OrderDTO;
+import com.amarsoft.springboot.enums.OrderStatusEnum;
+import com.amarsoft.springboot.enums.PayStatusEnum;
 import com.amarsoft.springboot.repository.OrderDetailRepository;
 import com.amarsoft.springboot.repository.OrderMasterRepository;
 import com.amarsoft.springboot.service.OrderService;
@@ -140,7 +142,28 @@ prd005	蚂蚁上树	18	333	价格实惠,味道很不错！	http://很健康.jpg	
 	 public void testCancle(){
 		 OrderDTO findOne = orderService.findOne(ORDERID);
 		 OrderDTO cancle = orderService.cancle(findOne);
-		 Assert.assertEquals(0,cancle.getOrderStatus().doubleValue());
+		 Assert.assertEquals(OrderStatusEnum.CANCLE.getCode(),cancle.getOrderStatus());
+	 }
+	 /**
+	  * 
+	  * @Title: testCancle
+	  * @Description: TODO(这里用一句话描述这个方法的作用) 
+	  * @author jiangshanwen
+	  * @date 2019年12月18日 下午10:29:13
+	  * @throws
+	  */
+	 @Test
+	 public void testFinished(){
+		 OrderDTO findOne = orderService.findOne(ORDERID);
+		 OrderDTO finished = orderService.finished(findOne);
+		 Assert.assertEquals(OrderStatusEnum.FINISHED.getCode(),finished.getOrderStatus());
+	 }
+	 
+	 @Test
+	 public void testPaid(){
+		 OrderDTO findOne = orderService.findOne(ORDERID);
+		 OrderDTO payid = orderService.payid(findOne);
+		 Assert.assertEquals(PayStatusEnum.PAY.getCode(),payid.getPayStatus());
 	 }
 	 
 	 
