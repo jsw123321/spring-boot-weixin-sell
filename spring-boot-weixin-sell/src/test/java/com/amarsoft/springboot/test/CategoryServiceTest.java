@@ -46,7 +46,7 @@ public class CategoryServiceTest {
 	 */
 	@Test
 	public void testGetOne(){
-		ProductCategory productCategory = categoryService.findOne(1);
+		ProductCategory productCategory = categoryService.findOne(4);
 		System.out.println(productCategory.toString());
 	}
 	

@@ -85,4 +85,17 @@ public class SellException extends RuntimeException {
 		super(message, cause, enableSuppression, writableStackTrace);
 	}
 
+	/**   
+	 * @Title:  SellException   
+	 * @Description:TODO(这里用一句话描述这个方法的作用)   
+	 * @param:  @param code2
+	 * @param:  @param defaultMessage  
+	 * @throws   
+	 */  
+	
+	public SellException(Integer code, String defaultMessage) {
+		super(defaultMessage);
+		this.code=code;
+	}
+
 }

@@ -167,8 +167,8 @@ public class OrderServiceImpl implements OrderService {
 			private Integer payStatus;// 支付状态，默认未支付.
 		 */
 		OrderMaster orderMaster=new OrderMaster();
+		orderDTO.setOrderId(orderId);
 		BeanUtils.copyProperties(orderDTO, orderMaster);
-		orderMaster.setOrderId(orderId);
 //		orderMaster.setBuyerOpenid(orderDTO.getBuyerOpenid());
 //		orderMaster.setBuyerPhone(orderDTO.getBuyerPhone());
 //		orderMaster.setBuyerName(orderDTO.getBuyerName());
