@@ -198,14 +198,14 @@ public class OrderServiceImpl implements OrderService {
 	public OrderDTO findOne(String orderId) {
 		OrderMaster orderMaster = orderMasterRepository.getOne(orderId);
 		if(null==orderMaster){
-			throw new SellException(ResultEnum.ORDER_MASTER_ERROR);
+			throw new SellException(ResultEnum.ORDER_NOT_EXIST);
 		}
 //		OrderMaster one = orderMasterRepository.getOne("1576409643590274207");
 		OrderDTO orderDTO=new OrderDTO();
 		BeanUtils.copyProperties(orderMaster, orderDTO);
 		List<OrderDetail> orderDetailList = orderDetailRepository.findListByOrderId(orderId);
 		if(CollectionUtils.isEmpty(orderDetailList)){
-			throw new SellException(ResultEnum.ORDER_DETAIL_ERROR);
+			throw new SellException(ResultEnum.ORDERDETAIL_NOT_EXIST);
 		}
 		orderDTO.setOrderDetailList(orderDetailList);
 		return orderDTO;
@@ -257,7 +257,7 @@ public class OrderServiceImpl implements OrderService {
 		//(3)返回库存
 		if(CollectionUtils.isEmpty(orderDTO.getOrderDetailList())){
 			log.info("【取消订单】订单详情为空:ordeDTO:{}",orderDTO);
-			throw new SellException(ResultEnum.ORDER_DETAIL_ERROR);
+			throw new SellException(ResultEnum.ORDER_DETAIL_EMPTY);
 		}
 		List<CartDTO> cartDTOList = orderDTO.getOrderDetailList().stream().map(e ->new CartDTO(e.getProductId(),e.getProductQuantity())).collect(Collectors.toList());
 		productInfoService.increaseStock(cartDTOList);

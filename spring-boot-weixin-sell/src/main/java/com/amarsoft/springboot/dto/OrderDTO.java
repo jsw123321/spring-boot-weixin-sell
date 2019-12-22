@@ -15,6 +15,9 @@ import java.util.List;
 import javax.persistence.Id;
 
 import com.amarsoft.springboot.dataobject.OrderDetail;
+import com.amarsoft.springboot.utils.serializer.Date2LongSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.jsonschema.JsonSerializableSchema;
 
 import lombok.Data;
 
@@ -55,9 +58,11 @@ public class OrderDTO {
 	private Integer payStatus;
 
 	/** 创建时间. */
+	@JsonSerialize(using=Date2LongSerializer.class)
 	private Date createTime;
 
 	/** 修改时间. */
+	@JsonSerialize(using=Date2LongSerializer.class)
 	private Date updateTime;
 
 	/**订单明细列表.*/
