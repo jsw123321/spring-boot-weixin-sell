@@ -9,7 +9,6 @@
 package com.amarsoft.springboot.controller;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,8 +25,6 @@ import com.amarsoft.springboot.dataobject.ProductCategory;
 import com.amarsoft.springboot.dataobject.ProductInfo;
 import com.amarsoft.springboot.service.CategoryService;
 import com.amarsoft.springboot.service.ProductInfoService;
-
-import ch.qos.logback.core.joran.util.beans.BeanUtil;
 
 /** 
  * @Title: 
@@ -50,7 +47,7 @@ public class BuyerProductController {
        public ResultVO list(){
     	   //1.查询所有上架商品
     	   List<ProductInfo> productInfoUpList = productService.findUpAll();
-    	   //2.查询类目--一次性查出来
+    	   //2.查询类目--一次性查出来   Java 8 Lambda 表达式及 Stream 在集合中的用法
     	   List<Integer> categoryTypeList = productInfoUpList.stream().map(e -> e.getCategoryType()).collect(Collectors.toList());
     	   List<ProductCategory> productCategoryList = categoryService.findByCategoryTypeIn(categoryTypeList);
     	   //3.数据的拼装
